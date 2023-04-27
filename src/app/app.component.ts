@@ -16,9 +16,10 @@ export class AppComponent implements OnInit{
   displayedColumns: string[] = [
     'id',
     'category', 
-    'input', 
+    'item', 
     'quantity', 
-    'datePurchase'
+    'datePurchase',
+    'actions'
   ];
 
   dataSource!: MatTableDataSource<any>;
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit{
   };
 
   getInventoryList() {
-    this._invService.getInventoryList().subscribe({
+    this._invService.getInventoryList().subscribe({ //fetch and watch data on html
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit{
     })
   };
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event) { //filtering html data
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
