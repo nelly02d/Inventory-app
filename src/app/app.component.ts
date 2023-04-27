@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog'
+import { InventoryFormComponent } from './inventory-form/inventory-form.component';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'inventory-app';
+
+  constructor(private _dialog: MatDialog) {}
+
+  openAddInventoryForm() {
+    this._dialog.open(InventoryFormComponent)
+  }
 }
