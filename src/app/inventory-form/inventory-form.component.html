@@ -1,0 +1,32 @@
+<div mat-dialog-title>
+  <h1>Inventory Form</h1>
+</div>
+<div mat-dialog-content class="content">
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Input</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+  </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Qty</mat-label>
+        <input matInput type="number">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date Purchase</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div> 
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-raised-button color="accent">Cancel</button>
+  <button mat-raised-button color="primary">Save</button>
+</div>
