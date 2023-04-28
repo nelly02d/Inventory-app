@@ -7,7 +7,9 @@
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Category</mat-label>
-        <input matInput formControlName="category">
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let val of category" [value]="val">{{val}}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Item</mat-label>
@@ -29,7 +31,7 @@
       </div> 
   </div>
   <div mat-dialog-actions class="actions">
-    <button mat-raised-button color="accent">Cancel</button>
-    <button mat-raised-button color="primary" type="submit">Save</button>
+    <button mat-raised-button color="accent" type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{ data ? 'Update' : 'Save' }}</button>
   </div>
 </form>

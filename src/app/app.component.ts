@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
 import { InventoryFormComponent } from './inventory-form/inventory-form.component';
 import { InventoryService } from './services/inventory.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { CoreService } from './core/core.service';
 
 
 @Component({
@@ -27,7 +28,11 @@ export class AppComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _dialog: MatDialog, private _invService: InventoryService) {}
+  constructor(
+    private _dialog: MatDialog, 
+    private _invService: InventoryService,
+    private _coreService: CoreService 
+  ) {}
 
   ngOnInit(): void {
    this.getInventoryList();
@@ -35,7 +40,15 @@ export class AppComponent implements OnInit{
   };
 
   openAddInventoryForm() {
-    this._dialog.open(InventoryFormComponent) //This will open the form dialog box
+    const dialogRef = this._dialog.open(InventoryFormComponent) //This will open the form dialog box
+
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if(val) {
+          this.getInventoryList();
+        }
+      }
+    })
   };
 
   getInventoryList() {
@@ -48,6 +61,30 @@ export class AppComponent implements OnInit{
       error: console.log
     })
   };
+
+  deleteInventory(id: number) {
+    this._invService.deletetInventory(id).subscribe({
+      next: (res) => {
+        this._coreService.openSnackBar('Item is deleted!', 'Done!');
+        this.getInventoryList();
+      },
+      error: console.log
+    })
+  }
+
+  editInventory(data: any) {
+   const dialogRef = this._dialog.open(InventoryFormComponent, {
+    data,
+   })
+
+   dialogRef.afterClosed().subscribe({
+    next: (val) => {
+      if(val) {
+        this.getInventoryList();
+      }
+    }
+  })
+  }
 
   applyFilter(event: Event) { //filtering html data
     const filterValue = (event.target as HTMLInputElement).value;

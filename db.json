@@ -18,18 +18,25 @@
   },
   "inventory": [
     {
-      "category": "Clothes",
-      "item": "Nike Shirt",
+      "category": "Bedroom",
+      "item": "Pillow",
       "quantity": 2,
-      "datePurchase": "2023-04-07T04:00:00.000Z",
+      "datePurchase": "2023-04-12T04:00:00.000Z",
       "id": 1
     },
     {
-      "category": "Shoes",
-      "item": "Adidas shoes",
-      "quantity": 3,
-      "datePurchase": "2021-06-10T04:00:00.000Z",
+      "category": "Kitchen",
+      "item": "Knife",
+      "quantity": 4,
+      "datePurchase": "2023-04-18T04:00:00.000Z",
       "id": 2
+    },
+    {
+      "category": "Dressing Room",
+      "item": "Gab Clothes",
+      "quantity": 4,
+      "datePurchase": "2023-04-19T04:00:00.000Z",
+      "id": 3
     }
   ]
 }
